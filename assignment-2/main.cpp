@@ -1,16 +1,6 @@
-#include "iostream"
+#include <iostream>
 
 #include <Eigen/Dense>
-
-Eigen::Matrix3d rotate_x(double degrees)
-{
-    Eigen::Matrix3d matrix;
-    matrix <<
-        1.0, 0.0, 0.0,
-    0.0, std::cos(degrees), -std::sin(degrees),
-    0.0, std::sin(degrees), std::cos(degrees);
-    return matrix;
-}
 
 void example(double constant)
 {
