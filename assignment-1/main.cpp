@@ -49,15 +49,8 @@ double deg_to_rad(double degrees)
         std::cout <<-skew_matrix.transpose() << std::endl;
     }
 
-//    int main()
-//    {
-//     skew_symmetric_test();
-//      return 0;
-//      }
 
-Eigen::Matrix3d rotation_matrix_from_frame_axes(const Eigen::Vector3d &x,
-const Eigen::Vector3d &y,
-const Eigen::Vector3d &z)
+Eigen::Matrix3d rotation_matrix_from_frame_axes(const Eigen::Vector3d &x, const Eigen::Vector3d &y, const Eigen::Vector3d &z)
     {
         Eigen::Matrix3d matrix;
         matrix.col(0) = x;
@@ -163,11 +156,14 @@ void transform_vector()
     Eigen::Vector4d v2 = Eigen::Vector4d{v[0], v[1], v[2], 1};
     Eigen::Vector4d vw1 = t * v2;
     Eigen::Vector3d vw2 = Eigen::Vector3d{vw1[0], vw1[1], vw1[2]};
-    std::cout << "Transformed vector in frame {w}: " << vw2.transpose() << std::endl;
+    std::cout << "Transformed vector in frame {w}: \n" << vw2 << std::endl;
 }
 
 int main()
 {
+    skew_symmetric_test();
+    rotation_matrix_test();
+    transformation_matrix_test();
     transform_vector();
     return 0;
 }
