@@ -2,6 +2,8 @@
 
 #include <Eigen/Dense>
 
+# include <math/math.h>
+
 double deg_to_rad(double degrees)
 {
     return degrees * M_PI / 180;
