@@ -8,76 +8,39 @@
 #endif //MATH_H
 namespace math
 {
-    bool floatEquals(double a, double b)
-    {
-        return std::abs(a - b) < 1e-6;
-    }
+    double deg_to_rad(double degrees);
+    double rad_to_deg(double radians);
 
-    Eigen::Matrix3d rotate_x(double radians)
-    {
-        Eigen::Matrix3d matrix;
-        matrix
-            <<
-            1.0, 0.0, 0.0,
-            0.0, std::cos(radians), -std::sin(radians),
-            0.0, std::sin(radians), std::cos(radians);
-        return matrix;
-    }
+    double const_deg_to_rad();
 
-    Eigen::Matrix3d rotate_y(double radians)
-    {
-        Eigen::Matrix3d matrix;
-        matrix
-            <<
-            std::cos(radians), 0.0, std::sin(radians),
-            0.0, 1.0, 0.0,
-            -std::sin(radians), 0.0, std::cos(radians);
-        return matrix;
-    }
+    double const_rad_to_deg();
 
-    Eigen::Matrix3d rotate_z(double radians)
-    {
-        Eigen::Matrix3d matrix;
-        matrix
-            <<
-            std::cos(radians), -std::sin(radians), 0.0,
-            std::sin(radians), std::cos(radians), 0.0,
-            0.0, 0.0, 1.0;
-        return matrix;
-    }
+    bool floatEquals(double a, double b);
 
-    Eigen::Matrix3d rotation_matrix_from_euler_zyx(const Eigen::Vector3d &e)
-    {
-        return rotate_z(e.x()) * rotate_y(e.y()) * rotate_x(e.z());
-    }
+    Eigen::Matrix3d skew_symmetric(const Eigen::Vector3d &v);
 
-    Eigen::Vector3d euler_zyx_from_rotation(const Eigen::Matrix3d &r)
-    {
-        double a = 0.0;
-        double b = 0.0;
-        double c = 0.0;
+    Eigen::Matrix3d rotate_x(double radians);
 
-        if(floatEquals(r(2, 0), -1.0))
-        {
-            b = EIGEN_PI / 2.0;
-            a = 0.0;
-            c = std::atan2(r(0, 1), r(1, 1));
-        }
-        else if(floatEquals(r(2, 0), 1.0))
-        {
-            b = -(EIGEN_PI / 2.0);
-            a = 0.0;
-            c = -std::atan2(r(0, 1), r(1, 1));
-        }
-        else
-        {
-            b = std::atan2(-r(2, 0), std::sqrt(r(0, 0) * r(0, 0) + r(1, 0) * r(1, 0)));
-            a = std::atan2(r(1, 0), r(0, 0));
-            c = std::atan2(r(2, 1), r(2, 2));
-        }
-        return Eigen::Vector3d{a, b, c};
-    }
+    Eigen::Matrix3d rotate_y(double radians);
 
-    Eigen::VectorXd twist(const Eigen::Vector3d &w, const Eigen::Vector3d &v)
+    Eigen::Matrix3d rotate_z(double radians);
 
+    Eigen::Matrix3d rotation_matrix_from_euler_zyx(const Eigen::Vector3d &e);
+
+    Eigen::Matrix3d rotation_matrix_from_euler_yzx(const Eigen::Vector3d &e);
+
+    Eigen::Vector3d euler_zyx_from_rotation(const Eigen::Matrix3d &r);
+
+    Eigen::Matrix4d transformation_matrix(const Eigen::Matrix3d &r, const Eigen::Vector3d &p);
+
+    Eigen::VectorXd screw_axis(const Eigen::Vector3d &q, const Eigen::Vector3d &s, double h);
+
+    Eigen::Matrix3d matrix_exponential(const Eigen::Vector3d &w, double theta); // Uses Rad
+
+    Eigen::Matrix4d matrix_exponential(const Eigen::Vector3d &w, const Eigen::Vector3d &v, double theta);
+
+    Eigen::MatrixXd adjoint_matrix(const Eigen::Matrix4d &tf);
+
+    void print_pose(const std::string &label, const Eigen::Matrix4d &tf);
+    
 }
