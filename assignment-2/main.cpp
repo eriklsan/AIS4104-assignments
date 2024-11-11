@@ -498,8 +498,6 @@ int main()
     // test_matrix_logarithm();
     // planar_3r_fk_transform({10,-15, 2.75});
     // planar_3r_fk_screw({10,-15, 2.75});
-    //std::cout << planar_3r_fk_transform({0, 0, 90}) << std::endl<< std::endl;
-    //std::cout << planar_3r_fk_screw({0, 0, 90}) << std::endl;
 
     ur3e_fk_screw({0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
     // std::cout << ur3e_fk_screw({0.0, 0.0, 0.0, 0.0, 0.0, 0.0}) << std::endl;
@@ -514,16 +512,4 @@ int main()
     ur3e_fk_screw({0.0, 0.0, -90.0, 0.0, 0.0, 0.0});
     ur3e_fk_transform({0.0, 0.0, -90.0, 0.0, 0.0, 0.0});
 
-
-    /*
-    Eigen::Matrix3d matrix = math::rotate_x(90*math::const_deg_to_rad());
-    std::cout << "Matrix Rotation X: " << matrix << std::endl;
-    Eigen::Matrix3d matrixy = math::rotate_y(90*math::const_deg_to_rad());
-    std::cout << "Matrix Rotation Y: " << matrixy << std::endl;
-    Eigen::Matrix3d matrixz = math::rotate_z(90*math::const_deg_to_rad());
-    std::cout << "Matrix Rotation Z: " << matrixz << std::endl;
-    */
-
-    //make_matrix_for_function();
-    //std::cout << make_matrix_for_function() << std::endl;
 }
